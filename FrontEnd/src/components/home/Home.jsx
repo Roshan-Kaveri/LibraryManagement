@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BookGrid from '../book/BookGrid';
 import { jwtDecode } from 'jwt-decode';
+import NavBar from '../navbar/NavBar';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -81,8 +82,9 @@ export default function Home() {
 
   return (
     <>
+    <NavBar></NavBar>
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-blue-600">Welcome to the Book Library</h1>
+        <h1 className="text-4xl font-bold text-greenish">Welcome to the Book Library</h1>
         <div className="mt-4">
           {user ? (
             <p>User ID: {user.userId}</p>
@@ -98,13 +100,13 @@ export default function Home() {
           type="text"
           name="title"
           placeholder="Search by Title"
-          className="border px-3 py-2 rounded"
+          className="border px-3 py-2 rounded w-96 border-greenish"
           onChange={handleFilterChange}
           value={filters.title}
         />
         {/* Filter Button */}
         <button
-          className="border px-3 py-2 rounded bg-blue-600 text-white"
+          className="border px-3 py-2 rounded bg-greenish text-blueish"
           onClick={() => setShowFilters(!showFilters)} // Toggle filter menu
         >
           Filters
