@@ -13,7 +13,6 @@ export default function LoginEmail() {
     setErrorMessage('');
 
     try {
-      // Send POST request to backend with email and password using fetch
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
