@@ -34,6 +34,8 @@ export default function Home() {
     }
   };
 
+
+  
   // Decode token and set user info
   useEffect(() => {
     const token = localStorage.getItem('token');
