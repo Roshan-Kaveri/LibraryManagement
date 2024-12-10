@@ -7,6 +7,11 @@ const authRoutes = require('./routes/authRoutes');
 const googleLogin = require('./routes/googleLogin');
 const authLogin = require('./routes/authLogin');
 const getBooks = require('./routes/getBook');
+const getBooksbyID = require('./routes/getBookfromId');
+const handleBookRequest =  require('./routes/handleBookRequests');
+const handleAdmin =  require('./routes/handleAdmin');
+
+
 
 const Book = require('./models/book'); 
 
@@ -24,6 +29,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/auth', googleLogin);
 app.use('/api/auth', authLogin);
 app.use('/api/books', getBooks);
+app.use('/api/books', getBooksbyID);
+app.use('/api', handleBookRequest);
+app.use('/api', handleAdmin);
+
 
 
 app.listen(PORT, () => {
