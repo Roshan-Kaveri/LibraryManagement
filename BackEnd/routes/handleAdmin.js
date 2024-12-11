@@ -7,8 +7,9 @@ router.patch('/rent-requests/approve', async (req, res) => {
   const { requestId } = req.body;  
   try {
     const reservedUntil = new Date();
-    reservedUntil.setMinutes(reservedUntil.getMinutes() + 2); // Add 5 hours to the current time
+    reservedUntil.setMinutes(reservedUntil.getMinutes() + 2);
 
+    
     const updatedRequest = await RentRequest.findByIdAndUpdate(
       requestId,
       { 
