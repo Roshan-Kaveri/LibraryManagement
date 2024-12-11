@@ -3,13 +3,18 @@ const router = express.Router();
 const Book = require('../models/book'); 
 const RentRequest = require('../models/requests'); 
 
-// admin
 router.patch('/rent-requests/approve', async (req, res) => {
   const { requestId } = req.body;  
   try {
+    const reservedUntil = new Date();
+    reservedUntil.setMinutes(reservedUntil.getMinutes() + 2); // Add 5 hours to the current time
+
     const updatedRequest = await RentRequest.findByIdAndUpdate(
       requestId,
-      { status: 'Waiting to be Collected' },
+      { 
+        status: 'Waiting to be Collected', 
+        reservedUntil: reservedUntil 
+      },
       { new: true }
     );
     if (!updatedRequest) {
@@ -20,6 +25,7 @@ router.patch('/rent-requests/approve', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 
 router.patch('/rent-requests/collect', async (req, res) => {
   const { requestId } = req.body; 

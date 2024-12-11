@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
 
 const RentRequestSchema = new mongoose.Schema({
-    userId: { type: String, required: true },
-    bookId: { type: String, required: true },
-    bookTitle: { type: String, required: true },
-    status: { 
-      type: String, 
-      enum: ["Requested", "Approved", "Waiting to be Collected", "Collected", "Returned"], 
-      default: "Requested" 
-    },
-    createdAt: { type: Date, default: Date.now },
-  });
-  
+  userId: { type: String, required: true },
+  bookId: { type: String, required: true },
+  bookTitle: { type: String, required: true },
+  status: { 
+    type: String, 
+    enum: ["Requested", "Approved", "Waiting to be Collected", "Late", "Collected", "Returned"], 
+    default: "Requested" 
+  },
+  reservedUntil: { type: Date }, // Time until the reservation is valid
+  createdAt: { type: Date, default: Date.now },
+});
+
 
 const RentRequest = mongoose.model("RentRequest", RentRequestSchema);
 
