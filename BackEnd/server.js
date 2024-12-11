@@ -10,6 +10,7 @@ const getBooks = require('./routes/getBook');
 const getBooksbyID = require('./routes/getBookfromId');
 const handleBookRequest =  require('./routes/handleBookRequests');
 const handleAdmin =  require('./routes/handleAdmin');
+const startCronJob = require('./cron-jobs/updatefine'); 
 
 
 
@@ -24,6 +25,11 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
+
+
+// Initialize the cron job
+startCronJob();
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', googleLogin);

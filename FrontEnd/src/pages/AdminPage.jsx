@@ -64,7 +64,6 @@ const AdminDashboard = () => {
         throw new Error("Failed to mark as collected");
       }
       const updatedRequest = await response.json();
-  
       setRequests((prev) =>
         prev.map((req) => (req._id === id ? updatedRequest : req))
       );
@@ -92,6 +91,19 @@ const AdminDashboard = () => {
     }
   };
 
+  // Helper function to calculate time remaining
+  const calculateTimeRemaining = (reservedUntil, isFined) => {
+    if (isFined) return "Fined";  // Check if the fine flag is true
+    const now = new Date();
+    const timeLeft = new Date(reservedUntil) - now;
+    if (timeLeft <= 0) return "Fined";
+    
+    const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60)); 
+    const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+    return `${hoursLeft}h ${minutesLeft}m`;
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -104,6 +116,7 @@ const AdminDashboard = () => {
             <th className="border border-gray-300 px-4 py-2">Book Title</th>
             <th className="border border-gray-300 px-4 py-2">User ID</th>
             <th className="border border-gray-300 px-4 py-2">Status</th>
+            <th className="border border-gray-300 px-4 py-2">Time Remaining</th>
             <th className="border border-gray-300 px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -113,6 +126,10 @@ const AdminDashboard = () => {
               <td className="border border-gray-300 px-4 py-2">{req.bookTitle}</td>
               <td className="border border-gray-300 px-4 py-2">{req.userId}</td>
               <td className="border border-gray-300 px-4 py-2">{req.status}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {req.status === "Waiting to be Collected" &&
+                  calculateTimeRemaining(req.reservedUntil, req.isFined)} {/* Check if fine is applied */}
+              </td>
               <td className="border border-gray-300 px-4 py-2">
                 {req.status === "Requested" && (
                   <button
