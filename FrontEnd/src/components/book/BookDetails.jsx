@@ -79,7 +79,7 @@ const BookDetails = () => {
   // Handle rent request
   const handleRequestRent = async () => {
     if (!user || !book) return;  // Ensure both user and book are available
-
+    console.log("here")
     try {
       const response = await fetch(`http://localhost:5000/api/requests/rent`, {
         method: 'POST',
@@ -90,6 +90,7 @@ const BookDetails = () => {
           bookTitle: book.booktitle // Send bookId inside POST data
         }),
       });
+      console.log(response)
       if (!response.ok) {
         throw new Error("Failed to request the book");
       }
@@ -104,7 +105,7 @@ const BookDetails = () => {
 
   // If error, display error message
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
-
+  console.log(requestStatus)
   return (
     <div>
       <NavBar />

@@ -28,7 +28,7 @@ connectDB();
 
 
 // Initialize the cron job
-startCronJob();
+ startCronJob();
 
 
 app.use('/api/auth', authRoutes);
