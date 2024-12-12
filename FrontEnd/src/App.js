@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import RegisterForm from "./pages/RegisterForm";
 import BookDetails from "./components/book/BookDetails";
 import AdminPage from "./pages/AdminPage";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/book/:bookid" element={<BookDetails />} />
 
-
+            <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminPage />} />
 
           </Routes>
