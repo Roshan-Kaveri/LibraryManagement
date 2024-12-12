@@ -10,6 +10,11 @@ const getBooks = require('./routes/getBook');
 const getBooksbyID = require('./routes/getBookfromId');
 const handleBookRequest =  require('./routes/handleBookRequests');
 const handleAdmin =  require('./routes/handleAdmin');
+const handleMyBooks =  require('./routes/handleMyBooks');
+const handleFines =  require('./routes/handleFines');
+const getUserById =  require('./routes/getUserFromId');
+
+
 const startCronJob = require('./cron-jobs/updatefine'); 
 
 
@@ -38,6 +43,10 @@ app.use('/api/books', getBooks);
 app.use('/api/books', getBooksbyID);
 app.use('/api', handleBookRequest);
 app.use('/api', handleAdmin);
+app.use('/api', handleMyBooks);
+app.use('/api', handleFines);
+app.use('/api/users', getUserById);
+
 
 
 
