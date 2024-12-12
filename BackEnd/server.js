@@ -13,13 +13,11 @@ const handleAdmin =  require('./routes/handleAdmin');
 const handleMyBooks =  require('./routes/handleMyBooks');
 const handleFines =  require('./routes/handleFines');
 const getUserById =  require('./routes/getUserFromId');
+const handlePayment =  require('./routes/handlePayment');
 
 
 const startCronJob = require('./cron-jobs/updatefine'); 
 
-
-
-const Book = require('./models/book'); 
 
 
 const app = express();
@@ -46,6 +44,7 @@ app.use('/api', handleAdmin);
 app.use('/api', handleMyBooks);
 app.use('/api', handleFines);
 app.use('/api/users', getUserById);
+app.use('/api', handlePayment);
 
 
 

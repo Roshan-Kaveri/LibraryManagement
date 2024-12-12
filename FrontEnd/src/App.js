@@ -6,8 +6,8 @@ import LoginForm from "./pages/LoginForm";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import RegisterForm from "./pages/RegisterForm";
 import BookDetails from "./components/book/BookDetails";
-import AdminPage from "./pages/AdminPage";
 import Profile from "./pages/Profile";
+import AdminPage from "./pages/Admin";
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/book/:bookid" element={<BookDetails />} />
-
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<h1>404 Not Found</h1>} />
 
           </Routes>
         </div>
