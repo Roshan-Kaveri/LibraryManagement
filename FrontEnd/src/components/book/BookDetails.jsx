@@ -120,33 +120,45 @@ const BookDetails = () => {
           </div>
           <div className="flex flex-col lg:flex-1">
             <h1 className="text-6xl font-bold text-gray-800">{book.booktitle}</h1>
-            <p className="text-2xl text-gray-600 mt-2 leading-none">Author</p>
-            <p className="text-xl text-gray-600 leading-none">{book.bookauthor}</p>
-            <p className="mt-4 text-2xl text-gray-600 mt-2 leading-none">About The Book</p>
+            <div className="flex w-40 mt-2">
+            <hr className="border-t-4 border-greenish w-full" />
+          </div>
+            <div className="flex mt-1">
+            <sup className="text-sm text-greenish mt-2 leading-none">by</sup>
+            <p className="text-xl pl-2 text-gray-600 leading-none">{book.bookauthor}</p>
+            </div>
+            <p className="mt-4 text-2xl text-greenish font-bold mt-2 leading-none">About The Book</p>
             <p className="text-gray-700 text-xl leading-relaxed">{book.bookdesc}</p>
             <div className="mt-6">
               <p className="text-gray-500 text-xl">
-                <span className="font-semibold text-xl">Category:</span> {book.category || "N/A"}
+                <span className="font-semibold text-greenish text-xl">Category:</span> {book.category || "N/A"}
               </p>
               <p className="text-gray-500 mt-1 text-xl">
-                <span className="font-semibold text-xl">Published Year:</span> {book.publishedYear || "N/A"}
+                <span className="font-semibold text-greenish text-xl">Published Year:</span> {book.publishedYear || "N/A"}
               </p>
             </div>
-            <div className="mt-4 flex items-center">
+            <div className=" flex items-center">
               <p className="text-yellow-500 text-xl">
-                <span className="font-semibold text-xl text-gray-500">Rating</span> <br/> {"★".repeat(book.ratings || 0)}
+                <span className="font-semibold text-xl text-greenish">Rating:</span>  {"★".repeat(book.ratings || 0)}
               </p>
             </div>
-            {requestStatus ? (
-              <p className="mt-6 text-xl text-gray-700">Request Status: {requestStatus}</p>
-            ) : (
-              <button
-                onClick={handleRequestRent}
-                className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-              >
-                Request to Rent
-              </button>
-            )}
+            <div className="flex  mt-6">
+  {requestStatus ? (
+    <div className="flex">
+          <p className="text-xl border-2 border-greenish px-6 py-2 rounded-lg bg-green-800 text-white transition-all duration-300">
+      {requestStatus}</p>
+
+    </div>
+  ) : (
+    <button
+      onClick={handleRequestRent}
+      className="inline-flex items-center justify-center border-2 border-greenish text-greenish px-6 py-2 rounded-lg hover:bg-green-800 hover:text-white transition-all duration-300"
+    >
+      Request to Rent
+    </button>
+  )}
+</div>
+
           </div>
         </div>
       </div>

@@ -5,6 +5,14 @@ const MyDetails = ({ userId }) => {
   const [userDetails, setUserDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
+  const handleLogout = () => {
+    // Clear the token from localStorage
+    localStorage.removeItem("token");
+    window.location.href = "/"; // Adjust the path as needed
+
+  }
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -37,10 +45,24 @@ const MyDetails = ({ userId }) => {
   }
 
   return (
-    <div>
-      <h2>User Details</h2>
-      <p><strong>Name:</strong> {userDetails.name}</p>
-      <p><strong>Email:</strong> {userDetails.email}</p>
+    <div className="flex justify-center flex-col items-center">
+      <div class="relative inline-block">
+      <h1
+        class="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-greenish via-sky-400 to-cyan-500">
+      <p>{userDetails.name}</p>
+    </h1>
+
+
+    <div class="relative flex flex-col justify-center inline- self-center items-center">
+  <span class="text-2xl md:text-3xl font-semibold">
+  <p>{userDetails.email}</p>
+  </span>
+  <span class="flex -bottom-1 left-0 w-64 h-1 bg-gradient-to-r from-greenish via-sky-400 to-cyan-500 rounded-full"></span>
+</div>
+
+</div>
+<button class="rounded-md mt-2  bg-red-600 px-4 py-2 font-bold leading-none text-white" onClick={handleLogout}>Logout</button>
+
       {/* Add more fields if necessary */}
     </div>
   );
