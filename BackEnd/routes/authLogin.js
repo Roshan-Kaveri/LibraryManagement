@@ -18,6 +18,12 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
+    if (!user.passwordHash) {
+      return res.status(400).json({ message: "Try logging in in diffrent method" });
+    }
+
+
+
     // Log the password and hash to check if both exist and are valid
     console.log("Password from request:", password);
     console.log("Password Hash from database:", user.passwordHash);
@@ -31,7 +37,7 @@ router.post("/login", async (req, res) => {
 
     // Create JWT token
     const token = jwt.sign({ userId: user._id }, "your-secret-key", {
-      expiresIn: "1h",
+      expiresIn: "10h",
     });
 
     // Respond with the token

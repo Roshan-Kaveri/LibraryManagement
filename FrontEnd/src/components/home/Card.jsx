@@ -9,13 +9,14 @@ const BookCard = ({ booktitle, bookauthor, bookdesc, img, bookid, ratings }) => 
     return (
       <div className="flex p-2 border  border-greenish shadow-md">
         {/* Image Section */}
-        <div className="w-2/6">
-          <img
-            src={img || "https://via.placeholder.com/150"}
-            alt={booktitle}
-            className="w-full h-full rounded-md"
-          />
-        </div>
+        <div className="w-2/6 h-40 overflow-hidden rounded-md">
+  <img
+    src={img || "https://via.placeholder.com/150"}
+    alt={booktitle}
+    className="w-full h-full object-cover"
+  />
+</div>
+
   
         {/* Details Section */}
         <div className="flex flex-col pt-1  ml-4 w-4/6">

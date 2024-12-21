@@ -111,13 +111,14 @@ const BookDetails = () => {
       <NavBar />
       <div className="container mx-auto p-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          <div className="flex-shrink-0 lg:w-2/5">
-            <img
-              src={book.img || "https://via.placeholder.com/300x400"}
-              alt={book.booktitle}
-              className="w-full h-auto rounded-lg shadow-md"
-            />
-          </div>
+        <div className="flex-shrink-0 h-[75vh] overflow-hidden lg:w-2/5">
+  <img
+    src={book.img || "https://via.placeholder.com/300x400"}
+    alt={book.booktitle || "Book Image"}
+    className="w-full h-full rounded-lg object-cover object-top shadow-md"
+  />
+</div>
+
           <div className="flex flex-col lg:flex-1">
             <h1 className="text-6xl font-bold text-gray-800">{book.booktitle}</h1>
             <div className="flex w-40 mt-2">

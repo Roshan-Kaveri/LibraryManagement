@@ -15,6 +15,9 @@ const handleFines =  require('./routes/handleFines');
 const getUserById =  require('./routes/getUserFromId');
 const handlePayment =  require('./routes/handlePayment');
 
+const createBooks =  require('./routes/createBook');
+
+
 
 const startCronJob = require('./cron-jobs/updatefine'); 
 
@@ -39,6 +42,10 @@ app.use('/api/auth', googleLogin);
 app.use('/api/auth', authLogin);
 app.use('/api/books', getBooks);
 app.use('/api/books', getBooksbyID);
+
+app.use('/api/books', createBooks);
+
+
 app.use('/api', handleBookRequest);
 app.use('/api', handleAdmin);
 app.use('/api', handleMyBooks);
