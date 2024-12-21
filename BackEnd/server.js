@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 require('dotenv').config(); 
 
 const connectDB = require('./config/db');
@@ -16,7 +17,7 @@ const getUserById =  require('./routes/getUserFromId');
 const handlePayment =  require('./routes/handlePayment');
 
 const createBooks =  require('./routes/createBook');
-
+const handleMail = require('./routes/handleMail');
 
 
 const startCronJob = require('./cron-jobs/updatefine'); 
@@ -36,6 +37,16 @@ connectDB();
 // Initialize the cron job
  startCronJob();
 
+
+ const transporter = nodemailer.createTransport({
+  service: 'Gmail', // You can use other services like Outlook, Yahoo, etc.
+  auth: {
+    user: 'roshan.k.kaveri@gmail.com',
+    pass: 'kdkw xolt vood inss', // Use an app password for security
+  },
+});
+
+app.use('/api/auth', handleMail);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', googleLogin);

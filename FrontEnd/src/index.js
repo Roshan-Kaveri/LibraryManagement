@@ -16,5 +16,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-console.log("Google Client ID:", clientId);
-console.log("Environment Variables:", process.env);
+
