@@ -8,6 +8,8 @@ import RegisterForm from "./pages/RegisterForm";
 import BookDetails from "./components/book/BookDetails";
 import Profile from "./pages/Profile";
 import AdminPage from "./pages/Admin";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
             <Route path="/book/:bookid" element={<BookDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminPage />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
+            <Route path="/forgot_password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+                        <Route path="*" element={<h1>404 Not Found</h1>} />
 
           </Routes>
         </div>
