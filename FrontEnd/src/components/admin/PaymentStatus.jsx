@@ -53,38 +53,49 @@ const PaymentStatus = () => {
   };
 
   return (
-    <div>
-      <h2>Users with Pending Fines</h2>
+    <div className="mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-6">Manage Fine Due</h1>
+
       {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <table border="1">
-          <thead>
-            <tr>
-              <th>User ID</th>
-              <th>Total Fine</th>
-              <th>Action</th>
+  <p className="text-center text-xl text-gray-500">Loading...</p>
+) : (
+  <div className="overflow-x-auto shadow-lg rounded-lg">
+    <table className="min-w-full table-auto border-collapse">
+      <thead className="bg-greenish text-white">
+        <tr>
+          <th className="py-3 px-4 text-left font-medium">User ID</th>
+          <th className="py-3 px-4 text-left font-medium">Total Fine</th>
+          <th className="py-3 px-4 text-left font-medium">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.length === 0 || users.every(user => user.totalFine === 0) ? (
+          <tr>
+            <td colSpan="3" className="py-3 px-4 text-center text-gray-500">
+              No pending dues
+            </td>
+          </tr>
+        ) : (
+          users.map((user) => (
+            <tr key={user.userId} className="border-b hover:bg-gray-100">
+              <td className="py-3 px-4">{user.username}</td>
+              <td className="py-3 px-4">${user.totalFine}</td>
+              <td className="py-3 px-4">
+                <button
+                  onClick={() => handleMarkPaid(user.userId)}
+                  className="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition duration-200"
+                >
+                  Mark Paid
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.userId}>
-                <td>{user.username}</td>
-                <td>${user.totalFine}</td>
-                <td>
-                  <button
-                    onClick={() => handleMarkPaid(user.userId)}
-                    className="bg-green-500 text-white p-2 rounded"
-                  >
-                    Mark Paid
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+)}
+</div>
   );
 };
 

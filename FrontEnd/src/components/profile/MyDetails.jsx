@@ -48,7 +48,7 @@ const MyDetails = ({ userId }) => {
     <div className="flex justify-center flex-col items-center">
       <div class="relative inline-block">
       <h1
-        class="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-greenish via-sky-400 to-cyan-500">
+        class="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-greenish  to-[#71f3d5]">
       <p>{userDetails.name}</p>
     </h1>
 

@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   passwordHash: { type: String },
   googleId: { type: String },
   name: { type: String, required: true },
+  isadmin: {type: Boolean, default: false}
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

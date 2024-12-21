@@ -87,13 +87,7 @@ export default function Home() {
     <NavBar></NavBar>
       <div className="text-center">
         <h1 className="text-4xl font-bold text-greenish">Welcome to the Book Library</h1>
-        <div className="mt-4">
-          {user ? (
-            <p>User ID: {user.userId}</p>
-          ) : (
-            <p className="text-red-600">No user information available. Please log in.</p>
-          )}
-        </div>
+      
       </div>
 
       {/* Title Search */}
