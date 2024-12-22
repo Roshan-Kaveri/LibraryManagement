@@ -8,7 +8,7 @@ const BookStatus = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/rent-requests");
+        const response = await fetch("https://libbackend.hmmbo.com/api/rent-requests");
         if (!response.ok) {
           throw new Error("Failed to fetch rent requests");
         }
@@ -32,7 +32,7 @@ const BookStatus = () => {
 
   const handleApprove = async (id) => {
     try {
-      const response = await fetch("http://localhost:5000/api/rent-requests/approve", {
+      const response = await fetch("https://libbackend.hmmbo.com/api/rent-requests/approve", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const BookStatus = () => {
 
   const handleCollect = async (id) => {
     try {
-      const response = await fetch("http://localhost:5000/api/rent-requests/collect", {
+      const response = await fetch("https://libbackend.hmmbo.com/api/rent-requests/collect", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const BookStatus = () => {
 
   const handleReturn = async (id) => {
     try {
-      const response = await fetch("http://localhost:5000/api/rent-requests/return", {
+      const response = await fetch("https://libbackend.hmmbo.com/api/rent-requests/return", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

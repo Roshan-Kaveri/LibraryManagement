@@ -8,7 +8,7 @@ const PaymentStatus = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/users/total-fines");
+        const response = await fetch("https://libbackend.hmmbo.com/api/users/total-fines");
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -28,7 +28,7 @@ const PaymentStatus = () => {
   // Handle "Paid" button click
   const handleMarkPaid = async (userId) => {
     try {
-      const response = await fetch("http://localhost:5000/api/fines/mark-paid", {
+      const response = await fetch("https://libbackend.hmmbo.com/api/fines/mark-paid", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

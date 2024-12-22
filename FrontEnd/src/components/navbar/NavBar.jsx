@@ -8,7 +8,7 @@ export default function NavBar() {
   useEffect(() => {
     const fetchUser = async (userId) => {
       try {
-        const response = await fetch(`http://localhost:5000/api/users/${userId}`);
+        const response = await fetch(`https://libbackend.hmmbo.com/api/users/${userId}`);
         const userData = await response.json();
         setUser(userData);
       } catch (error) {

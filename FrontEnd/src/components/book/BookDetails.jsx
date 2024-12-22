@@ -25,7 +25,7 @@ const BookDetails = () => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/books", {
+        const response = await fetch("https://libbackend.hmmbo.com/api/books", {
           method: "POST",  // Use POST method
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const BookDetails = () => {
 
     const fetchRequestStatus = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/requests/status`, {
+        const response = await fetch(`https://libbackend.hmmbo.com/api/requests/status`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -81,7 +81,7 @@ const BookDetails = () => {
     if (!user || !book) return;  // Ensure both user and book are available
     console.log("here")
     try {
-      const response = await fetch(`http://localhost:5000/api/requests/rent`, {
+      const response = await fetch(`https://libbackend.hmmbo.com/api/requests/rent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

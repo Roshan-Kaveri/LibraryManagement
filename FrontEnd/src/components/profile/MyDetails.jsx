@@ -16,7 +16,7 @@ const MyDetails = ({ userId }) => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/users/${userId}`);
+        const response = await fetch(`https://libbackend.hmmbo.com/api/users/${userId}`);
         if (!response.ok) {
           throw new Error("Error fetching user details");
         }

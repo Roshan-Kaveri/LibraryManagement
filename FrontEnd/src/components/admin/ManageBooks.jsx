@@ -9,7 +9,7 @@ const ManageBooks = () => {
 
   // Fetch books from the backend when the component mounts
   useEffect(() => {
-    fetch("http://localhost:5000/api/books/admin")
+    fetch("https://libbackend.hmmbo.com/api/books/admin")
       .then((response) => response.json())
       .then((data) => setBooks(data.books))  // Make sure you're accessing 'books' from the response
       .catch((error) => console.error("Error fetching books:", error));
@@ -21,7 +21,7 @@ const ManageBooks = () => {
 
   const handleDelete = (bookId) => {
     // Send DELETE request to backend to delete the book
-    fetch(`http://localhost:5000/api/books/delete/${bookId}`, {
+    fetch(`https://libbackend.hmmbo.com/api/books/delete/${bookId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -35,7 +35,7 @@ const ManageBooks = () => {
   const handleFormSubmit = (formData) => {
     if (editingBook) {
       // Send PUT request to backend to update the book
-      fetch(`http://localhost:5000/api/books/update/${editingBook._id}`, { // Use _id here as well
+      fetch(`https://libbackend.hmmbo.com/api/books/update/${editingBook._id}`, { // Use _id here as well
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
