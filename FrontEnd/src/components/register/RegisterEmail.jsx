@@ -117,11 +117,7 @@ export default function RegisterEmail() {
       >
         Register
       </button>
-      <Link to="/forgotpassword">
-        <button type="button" className="mt-2 text-blue-500">
-          Forgot your password? Click here
-        </button>
-      </Link>
+      
     </form>
   );
 }
