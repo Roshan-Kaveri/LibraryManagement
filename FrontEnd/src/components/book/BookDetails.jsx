@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { jwtDecode } from "jwt-decode"; // Import jwtDecode
 import NavBar from "../navbar/NavBar";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const BookDetails = () => {
   const bookId = useParams().bookid;
@@ -10,16 +12,21 @@ const BookDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-
+  const navigate = useNavigate();
   // Decode token and set user info
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decoded = jwtDecode(token);
-      const { userId } = decoded;
-      setUser({ userId });
-    }
-  }, []);
+
+useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decoded = jwtDecode(token);
+    const { userId } = decoded;
+    setUser({ userId });
+  } else {
+    // Redirect to login page if no token found
+    navigate('/login');
+  }
+}, []);
+
 
   // Fetch book details
   useEffect(() => {
@@ -79,7 +86,6 @@ const BookDetails = () => {
   // Handle rent request
   const handleRequestRent = async () => {
     if (!user || !book) return;  // Ensure both user and book are available
-    console.log("here")
     try {
       const response = await fetch(`https://libbackend.hmmbo.com/api/requests/rent`, {
         method: 'POST',
