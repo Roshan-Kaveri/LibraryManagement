@@ -10,7 +10,7 @@ export default function ResetPassword() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Function to get query parameter (token)
+  
   const getQueryParam = (param) => {
     const urlParams = new URLSearchParams(location.search);
     return urlParams.get(param);
@@ -44,7 +44,7 @@ export default function ResetPassword() {
       if (response.ok) {
         setSuccessMessage('Password reset successfully. You can now log in with your new password.');
         setTimeout(() => {
-          navigate('/');  // Redirect to home after success
+          navigate('/');  
         }, 2000);
       } else {
         setErrorMessage(data.error || 'Failed to reset password. Please try again.');

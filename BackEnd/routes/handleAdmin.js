@@ -10,7 +10,7 @@ router.patch('/rent-requests/approve', async (req, res) => {
     const reservedUntil = new Date();
     reservedUntil.setMinutes(reservedUntil.getMinutes() + 2);
 
-    // Update rent request
+    
     const updatedRequest = await RentRequest.findByIdAndUpdate(
       requestId,
       { 
@@ -24,14 +24,14 @@ router.patch('/rent-requests/approve', async (req, res) => {
       return res.status(404).send('Request not found');
     }
 
-    // Fetch user details using userId
+    
     const user = await User.findById(updatedRequest.userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
 
-    // Add user's name to the response
-    const response = updatedRequest.toObject(); // Convert to plain JS object
+    
+    const response = updatedRequest.toObject(); 
     response.userName = user.name;
     res.json(response);
   } catch (err) {
@@ -52,14 +52,14 @@ router.patch('/rent-requests/collect', async (req, res) => {
       return res.status(404).send('Request not found');
     }
 
-    // Fetch user details using userId
+    
     const user = await User.findById(updatedRequest.userId);
     if (!user) {
       return res.status(404).send('User not found');
     }
 
-    // Add user's name to the response
-    const response = updatedRequest.toObject(); // Convert to plain JS object
+    
+    const response = updatedRequest.toObject(); 
     response.userName = user.name;
     res.json(response);
 
@@ -96,10 +96,10 @@ router.patch('/rent-requests/return', async (req, res) => {
 
 router.get('/rent-requests', async (req, res) => {
   try {
-    // Fetch all rent requests
+    
     const requests = await RentRequest.find();
 
-    // Fetch user details for each request
+    
     const enrichedRequests = await Promise.all(
       requests.map(async (request) => {
         const user = await User.findById(request.userId);

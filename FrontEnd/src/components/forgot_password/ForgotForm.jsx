@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 export default function ForgotForm() {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState(''); // For success messages
+  const [message, setMessage] = useState(''); 
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()

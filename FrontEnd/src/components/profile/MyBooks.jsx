@@ -15,12 +15,12 @@ const MyBooks = ({user}) => {
                     console.log(user);
 
                     const response = await fetch('https://libbackend.hmmbo.com/api/my-books', {
-                        method: 'POST', // Use POST request to send userId in the body
+                        method: 'POST', 
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            userId: user.userId, // Send userId in the request body
+                            userId: user.userId, 
                         }),
                     });
 

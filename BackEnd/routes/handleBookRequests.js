@@ -54,20 +54,20 @@ router.post('/requests/rent', async (req, res) => {
 router.post("/requests/status", async (req, res) => {
   const { userId, bookId } = req.body;
 
-  // Validate request body
+  
   if (!userId || !bookId) {
     return res.status(400).json({ error: "Missing userId or bookId" });
   }
 
   try {
-    // Find the rent request for this user and book
+    
     const rentRequest = await RentRequest.findOne({ userId, bookId });
 
     if (!rentRequest) {
       return res.status(404).json({ status: "No request found" });
     }
 
-    // Return the status
+    
     res.json({ status: rentRequest.status });
   } catch (error) {
     console.error("Error fetching request status:", error);

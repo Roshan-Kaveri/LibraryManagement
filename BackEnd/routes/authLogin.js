@@ -12,7 +12,7 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-    // Check if user exists
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
@@ -24,23 +24,23 @@ router.post("/login", async (req, res) => {
 
 
 
-    // Log the password and hash to check if both exist and are valid
+    
     console.log("Password from request:", password);
     console.log("Password Hash from database:", user.passwordHash);
 
-    // Compare the provided password with the hashed password in the database
+    
     const isMatch = await bcrypt.compare(password, user.passwordHash);
 
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // Create JWT token
+    
     const token = jwt.sign({ userId: user._id }, "your-secret-key", {
       expiresIn: "10h",
     });
 
-    // Respond with the token
+    
     res.json({ token });
   } catch (error) {
     console.error("Error during login:", error);

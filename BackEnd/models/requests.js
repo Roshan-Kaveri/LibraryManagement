@@ -9,7 +9,7 @@ const RentRequestSchema = new mongoose.Schema({
     enum: ["Requested", "Approved", "Waiting to be Collected", "Late", "Collected", "Returned"], 
     default: "Requested" 
   },
-  reservedUntil: { type: Date }, // Time until the reservation is valid
+  reservedUntil: { type: Date }, 
   createdAt: { type: Date, default: Date.now },
 });
 

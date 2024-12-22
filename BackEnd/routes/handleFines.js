@@ -3,7 +3,7 @@ const Fine = require('../models/fine');
 const User = require('../models/user');
 const router = express.Router();
 
-// Route to get unpaid fines
+
 router.post('/unpaid-fines', async (req, res) => {
     const { userId } = req.body;
     console.log(userId, "PP")
@@ -19,45 +19,45 @@ router.post('/unpaid-fines', async (req, res) => {
 
 
 
-// Route to get all users with their total fines
+
 const mongoose = require('mongoose');
 
 router.get("/users/total-fines", async (req, res) => {
   try {
-    // Aggregate fines and calculate total fine for each user, filtering only unpaid fines (isPaid: false)
+    
     const usersFines = await Fine.aggregate([
       {
         $match: {
-          isPaid: false, // Only consider unpaid fines
+          isPaid: false, 
         },
       },
       {
         $group: {
-          _id: "$userId", // Group by userId
-          totalFine: { $sum: "$amount" }, // Sum up the fines for each user
+          _id: "$userId", 
+          totalFine: { $sum: "$amount" }, 
         },
       },
       {
         $addFields: {
-          userId: { $toObjectId: "$_id" }, // Convert userId string to ObjectId
+          userId: { $toObjectId: "$_id" }, 
         },
       },
       {
         $lookup: {
-          from: "users", // Join with the "users" collection
-          localField: "userId", // userId from Fine collection
-          foreignField: "_id", // _id from User collection
+          from: "users", 
+          localField: "userId", 
+          foreignField: "_id", 
           as: "userDetails",
         },
       },
       {
-        $unwind: "$userDetails", // Unwind to get individual user details
+        $unwind: "$userDetails", 
       },
       {
         $project: {
-          userId: "$userDetails._id", // Get userId
-          username: "$userDetails.name", // Get user's name
-          totalFine: 1, // Add totalFine to result
+          userId: "$userDetails._id", 
+          username: "$userDetails.name", 
+          totalFine: 1, 
         },
       },
     ]);
@@ -71,12 +71,12 @@ router.get("/users/total-fines", async (req, res) => {
 
 
 
-// Route to mark all fines as paid for a user
+
 router.post("/fines/mark-paid", async (req, res) => {
   const { userId } = req.body;
 
   try {
-    // Update all fines for the specified userId to be marked as paid
+    
     await Fine.updateMany({ userId, isPaid: false }, { $set: { isPaid: true } });
 
     res.status(200).json({ message: "Fines marked as paid" });

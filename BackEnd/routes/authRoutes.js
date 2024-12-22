@@ -29,10 +29,10 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    // Create a token for account deletion link
+    
     const deletionToken = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
-    // Send email with deletion link
+    
 
     const mailOptions = {
       from: 'your-email@gmail.com',
@@ -121,18 +121,18 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/delete-account', async (req, res) => {
-  const { token } = req.query; // The token is passed as a query parameter
+  const { token } = req.query; 
 
   if (!token) {
     return res.status(400).json({ error: 'Token is required' });
   }
 
   try {
-    // Verify the deletion token
+    
     const decoded = jwt.verify(token, 'your-secret-key');
     const userId = decoded.userId;
 
-    // Find and delete the user
+    
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });

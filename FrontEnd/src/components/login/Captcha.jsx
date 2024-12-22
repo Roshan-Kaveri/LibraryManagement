@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const TurnstileCaptcha = ({ onSuccess }) => {
   const captchaRef = useRef(null);
-  const [isLoaded, setIsLoaded] = useState(false); // Track if Turnstile has loaded
+  const [isLoaded, setIsLoaded] = useState(false); 
 
   useEffect(() => {
     const loadTurnstileScript = () => {
@@ -12,7 +12,7 @@ const TurnstileCaptcha = ({ onSuccess }) => {
         script.async = true;
         script.defer = true;
         script.onload = () => {
-          setIsLoaded(true); // Set loaded to true once the script is loaded
+          setIsLoaded(true); 
           renderCaptcha();
         };
         script.onerror = () => {
@@ -28,9 +28,9 @@ const TurnstileCaptcha = ({ onSuccess }) => {
       if (captchaRef.current && window.turnstile) {
         try {
           window.turnstile.render(captchaRef.current, {
-            sitekey: '0x4AAAAAAA1owqTEEqPaT6XY', // Replace with your Turnstile Site Key
+            sitekey: '0x4AAAAAAA1owqTEEqPaT6XY', 
             callback: (token) => {
-              // Ensure onSuccess is a function before calling it
+              
               if (onSuccess && typeof onSuccess === 'function') {
                 onSuccess(token);
               } else {
@@ -47,7 +47,7 @@ const TurnstileCaptcha = ({ onSuccess }) => {
     loadTurnstileScript();
 
     return () => {
-      // Cleanup script if component unmounts
+      
       const script = document.querySelector(`script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]`);
       if (script) {
         document.body.removeChild(script);
@@ -60,7 +60,7 @@ const TurnstileCaptcha = ({ onSuccess }) => {
       {isLoaded ? (
         <div ref={captchaRef} className="turnstile-widget"></div>
       ) : (
-        <p>Loading CAPTCHA...</p> // Show loading message if Turnstile is not yet loaded
+        <p>Loading CAPTCHA...</p> 
       )}
     </div>
   );

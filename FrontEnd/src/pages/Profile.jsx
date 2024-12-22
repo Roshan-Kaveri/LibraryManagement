@@ -17,7 +17,7 @@ const Profile = (props) => {
         }
     }, []);
 
-    // Return loading state while the user information is being fetched
+    
     if (!user) {
         return <div>Loading...</div>;
     }

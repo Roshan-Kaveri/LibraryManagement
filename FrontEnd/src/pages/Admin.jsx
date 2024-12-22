@@ -18,7 +18,7 @@ const AdminPage = () => {
         const decoded = jwtDecode(token);
         const userId = decoded.userId;
 
-        // Fetch user object from the backend
+        
         fetch(`https://libbackend.hmmbo.com/api/users/${userId}`)
           .then((response) => response.json())
           .then((data) => {
@@ -31,7 +31,7 @@ const AdminPage = () => {
           })
           .catch((err) => {
             console.error("Error fetching user data:", err);
-            navigate("/login"); // Redirect to login on error
+            navigate("/login"); 
           });
       } catch (err) {
         console.error("Error decoding token:", err);
@@ -44,7 +44,7 @@ const AdminPage = () => {
   }, [navigate]);
 
   if (!isAdmin) {
-    return null; // Prevent rendering if the user isn't an admin
+    return null; 
   }
 
   return (

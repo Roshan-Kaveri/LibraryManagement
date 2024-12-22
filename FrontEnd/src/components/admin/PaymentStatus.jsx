@@ -4,7 +4,7 @@ const PaymentStatus = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch the users with their total fines
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -25,7 +25,7 @@ const PaymentStatus = () => {
     fetchUsers();
   }, []);
 
-  // Handle "Paid" button click
+  
   const handleMarkPaid = async (userId) => {
     try {
       const response = await fetch("https://libbackend.hmmbo.com/api/fines/mark-paid", {
@@ -40,7 +40,7 @@ const PaymentStatus = () => {
         throw new Error("Failed to mark fines as paid");
       }
 
-      // Remove the user from the list once their fines are marked as paid
+      
       setUsers((prevUsers) =>
         prevUsers.filter((user) => user.userId !== userId)
       );

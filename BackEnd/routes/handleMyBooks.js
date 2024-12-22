@@ -5,7 +5,7 @@ const Book = require('../models/book');
 const router = express.Router();
 
 router.post('/my-books', async (req, res) => {
-    const { userId } = req.body; // Get the userId from the body of the request
+    const { userId } = req.body; 
     
     if (!userId) {
         return res.status(400).json({ error: "User ID is required" });
@@ -14,7 +14,7 @@ router.post('/my-books', async (req, res) => {
     console.log('Fetching books for User ID:', userId);
 
     try {
-        // Fetch rent requests
+        
         const rentRequests = await RentRequest.find({ 
             userId, 
             status: { $in: ['Approved','Late', 'Waiting to be Collected', 'Collected'] }

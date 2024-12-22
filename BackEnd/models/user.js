@@ -6,8 +6,8 @@ const userSchema = new mongoose.Schema({
   googleId: { type: String },
   name: { type: String, required: true },
   isadmin: { type: Boolean, default: false },
-  resetToken: { type: String }, // To store the reset token
-  resetTokenExpiry: { type: Date }, // To store the token expiry time
+  resetToken: { type: String }, 
+  resetTokenExpiry: { type: Date }, 
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

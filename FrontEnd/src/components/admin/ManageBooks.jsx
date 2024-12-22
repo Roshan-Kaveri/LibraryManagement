@@ -7,35 +7,33 @@ const ManageBooks = () => {
   const [books, setBooks] = useState([]);
   const [editingBook, setEditingBook] = useState(null);
 
-  // Fetch books from the backend when the component mounts
   useEffect(() => {
     fetch("https://libbackend.hmmbo.com/api/books/admin")
       .then((response) => response.json())
-      .then((data) => setBooks(data.books))  // Make sure you're accessing 'books' from the response
+      .then((data) => setBooks(data.books)) 
       .catch((error) => console.error("Error fetching books:", error));
   }, []);
 
   const handleEditClick = (book) => {
-    setEditingBook(book); // Set the book for editing
+    setEditingBook(book); 
   };
 
   const handleDelete = (bookId) => {
-    // Send DELETE request to backend to delete the book
     fetch(`https://libbackend.hmmbo.com/api/books/delete/${bookId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
       .then(() => {
-        // Remove the deleted book from the state
-        setBooks((prevBooks) => prevBooks.filter((book) => book._id !== bookId)); // Use _id for comparison
+        
+        setBooks((prevBooks) => prevBooks.filter((book) => book._id !== bookId)); 
       })
       .catch((error) => console.error("Error deleting book:", error));
   };
 
   const handleFormSubmit = (formData) => {
     if (editingBook) {
-      // Send PUT request to backend to update the book
-      fetch(`https://libbackend.hmmbo.com/api/books/update/${editingBook._id}`, { // Use _id here as well
+      
+      fetch(`https://libbackend.hmmbo.com/api/books/update/${editingBook._id}`, { 
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -44,13 +42,13 @@ const ManageBooks = () => {
       })
         .then((response) => response.json())
         .then(() => {
-          // Update the books state with the new book data
+          
           setBooks((prevBooks) =>
             prevBooks.map((book) =>
-              book._id === editingBook._id ? { ...book, ...formData } : book // Use _id here as well
+              book._id === editingBook._id ? { ...book, ...formData } : book 
             )
           );
-          setEditingBook(null); // Close the form
+          setEditingBook(null); 
         })
         .catch((error) => console.error("Error updating book:", error));
     }
@@ -67,7 +65,7 @@ const ManageBooks = () => {
         <ul className="bg-white ">
           {books.map((book) => (
             <BookItem
-              key={book._id}  // Use _id here for the key
+              key={book._id}  
               book={book}
               onEdit={handleEditClick}
               onDelete={() => handleDelete(book._id)}

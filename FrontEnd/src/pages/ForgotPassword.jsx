@@ -6,12 +6,12 @@ import LinkButton from "../components/login/LinkButton";
 const ForgotPassword = (props) => {
   return (
     <div className="flex relative">
-    {/* First element */}
+    
     <div className="flex flex-[2] h-[100vh] justify-center bg-blueish hidden md:flex">
       <LoginEmail />
     </div>
   
-    {/* Second element */}
+    
     <div className="flex flex-[8] h-[100vh] flex-col justify-center w-full md:w-auto">
       <ForgotForm />
       <LinkButton link={'/'} text="Go Back"></LinkButton>

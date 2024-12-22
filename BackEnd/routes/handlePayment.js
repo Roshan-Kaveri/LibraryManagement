@@ -7,7 +7,7 @@ router.post('/order', async (req, res) => {
   
     try {
       const options = {
-        amount: amount * 100, // Convert to paise
+        amount: amount * 100, 
         currency: currency || 'INR',
         receipt: `receipt_${Date.now()}`,
       };
@@ -19,12 +19,12 @@ router.post('/order', async (req, res) => {
     }
   });
   
-  // Endpoint to verify Razorpay payment
+  
   router.post('/verify', async (req, res) => {
     const { orderId, paymentId, signature, amount, userId } = req.body;
   
     const generatedSignature = crypto
-      .createHmac('sha256', 'YOUR_RAZORPAY_KEY_SECRET') // Replace with your Razorpay Key Secret
+      .createHmac('sha256', 'YOUR_RAZORPAY_KEY_SECRET') 
       .update(`${orderId}|${paymentId}`)
       .digest('hex');
   

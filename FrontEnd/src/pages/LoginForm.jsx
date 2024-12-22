@@ -10,12 +10,12 @@ import LinkButton from '../components/login/LinkButton'
 export default function LoginForm() {
   return (
     <div className='flex relative '>
-  {/* First element */}
+  
   <div className="flex flex-[2] h-[100vh] justify-center bg-blueish hidden md:flex">
     <SiginEmail />
   </div>
 
-  {/* Second element */}
+  
   <div className="flex flex-[8] h-[100vh] flex-col justify-center w-full md:w-auto">
     <GoogleLoginBtn />
     <Divder />

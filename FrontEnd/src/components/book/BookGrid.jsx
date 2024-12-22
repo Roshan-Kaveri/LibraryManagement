@@ -1,5 +1,5 @@
 import React from "react";
-import BookCard from "../home/Card"; // Assuming BookCard is the card component for individual books
+import BookCard from "../home/Card"; 
 
 const BookGrid = ({ books }) => {
   return (

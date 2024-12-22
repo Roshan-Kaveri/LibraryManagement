@@ -7,9 +7,9 @@ const MyDetails = ({ userId }) => {
 
 
   const handleLogout = () => {
-    // Clear the token from localStorage
+    
     localStorage.removeItem("token");
-    window.location.href = "/"; // Adjust the path as needed
+    window.location.href = "/"; 
 
   }
 
@@ -22,7 +22,7 @@ const MyDetails = ({ userId }) => {
         }
 
         const data = await response.json();
-        setUserDetails(data);  // Set the user data in state
+        setUserDetails(data);  
       } catch (error) {
         console.error("Error fetching user details:", error);
       } finally {
@@ -31,7 +31,7 @@ const MyDetails = ({ userId }) => {
     };
 
     fetchUserDetails();
-  }, [userId]); // Run this effect when userId changes
+  }, [userId]); 
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -63,7 +63,7 @@ const MyDetails = ({ userId }) => {
 </div>
 <button class="rounded-md mt-2  bg-red-600 px-4 py-2 font-bold leading-none text-white" onClick={handleLogout}>Logout</button>
 
-      {/* Add more fields if necessary */}
+      
     </div>
   );
 };

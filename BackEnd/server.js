@@ -43,7 +43,7 @@ app.use(express.json());
 connectDB();
 
 
-// Initialize the cron job
+
  startCronJob();
 
 
@@ -68,9 +68,9 @@ app.use('/api', handlePayment);
 
 
 
-// app.listen(PORT, () => {
-//   console.log(`Server running at https://localhost:${PORT}`);
-// });
+
+
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

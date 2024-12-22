@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        greenish: "#169180", // Frequently used green color
-        blueish: "#EFFAFC", // Frequently used light blue color
+        greenish: "#169180", 
+        blueish: "#EFFAFC", 
       },
     },
   },

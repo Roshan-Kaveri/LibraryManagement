@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { jwtDecode } from "jwt-decode"; // Import jwtDecode
+import { jwtDecode } from "jwt-decode"; 
 import NavBar from "../navbar/NavBar";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 
 const BookDetails = () => {
@@ -13,7 +13,7 @@ const BookDetails = () => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  // Decode token and set user info
+  
 
 useEffect(() => {
   const token = localStorage.getItem('token');
@@ -22,22 +22,22 @@ useEffect(() => {
     const { userId } = decoded;
     setUser({ userId });
   } else {
-    // Redirect to login page if no token found
+    
     navigate('/login');
   }
 }, []);
 
 
-  // Fetch book details
+  
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
         const response = await fetch("https://libbackend.hmmbo.com/api/books", {
-          method: "POST",  // Use POST method
+          method: "POST",  
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ bookId })  // Send bookId in the request body
+          body: JSON.stringify({ bookId })  
         });
 
         if (!response.ok) {
@@ -52,11 +52,11 @@ useEffect(() => {
     };
 
     fetchBookDetails();
-  }, [bookId]);  // Fetch book details when bookId changes
+  }, [bookId]);  
 
-  // Fetch request status when book or user changes
+  
   useEffect(() => {
-    if (!book || !user) return;  // Ensure both book and user are set
+    if (!book || !user) return;  
 
     const fetchRequestStatus = async () => {
       try {
@@ -65,7 +65,7 @@ useEffect(() => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             userId: user.userId,
-            bookId: book._id  // Send bookId as part of POST body
+            bookId: book._id  
           }),
         });
         if (!response.ok) {
@@ -76,16 +76,16 @@ useEffect(() => {
       } catch (err) {
         console.error(err.message);
       } finally {
-        setIsLoading(false);  // Set loading to false when request is complete
+        setIsLoading(false);  
       }
     };
 
     fetchRequestStatus();
-  }, [book, user]);  // Run this effect when either book or user changes
+  }, [book, user]);  
 
-  // Handle rent request
+  
   const handleRequestRent = async () => {
-    if (!user || !book) return;  // Ensure both user and book are available
+    if (!user || !book) return;  
     try {
       const response = await fetch(`https://libbackend.hmmbo.com/api/requests/rent`, {
         method: 'POST',
@@ -93,7 +93,7 @@ useEffect(() => {
         body: JSON.stringify({
           userId: user.userId,
           bookId: book._id,  
-          bookTitle: book.booktitle // Send bookId inside POST data
+          bookTitle: book.booktitle 
         }),
       });
       console.log(response)
@@ -106,10 +106,10 @@ useEffect(() => {
     }
   };
 
-  // If loading, display loading message
+  
   if (isLoading) return <p className="text-center text-gray-700">Loading...</p>;
 
-  // If error, display error message
+  
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
   console.log(requestStatus)
   return (

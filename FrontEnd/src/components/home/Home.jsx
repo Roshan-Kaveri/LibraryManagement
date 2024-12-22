@@ -11,7 +11,7 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
-  // Fetch books from the backend with filters and pagination
+  
   const fetchBooks = async (page, filters) => {
     setIsLoading(true);
     try {
@@ -20,9 +20,9 @@ export default function HomePage() {
       const data = await response.json();
       if (response.ok) {
         if (page === 1) {
-          setBooks(data.books); // Reset books when on the first page
+          setBooks(data.books); 
         } else {
-          setBooks((prevBooks) => [...prevBooks, ...data.books]); // Append books when not the first page
+          setBooks((prevBooks) => [...prevBooks, ...data.books]); 
         }
       } else {
         console.error('Error fetching books:', data.error);
@@ -36,7 +36,7 @@ export default function HomePage() {
 
 
   
-  // Decode token and set user info
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -48,19 +48,19 @@ export default function HomePage() {
 
   useEffect(() => {
     if (page === 1) {
-      setBooks([]); // Reset books when page is 1 (to avoid appending on first load with filters)
+      setBooks([]); 
     }
-    fetchBooks(page, filters); // Fetch books whenever page or filters change
+    fetchBooks(page, filters); 
   }, [page, filters]);
 
-  // Handle scroll for lazy loading
+  
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.offsetHeight - 10 &&
       !isLoading
     ) {
-      setPage((prevPage) => prevPage + 1); // Increase page for pagination
+      setPage((prevPage) => prevPage + 1); 
     }
   };
   
@@ -72,14 +72,14 @@ export default function HomePage() {
     };
   }, [isLoading]);
 
-  // Handle filter updates
+  
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
     }));
-    setPage(1); // Reset to the first page when filters change
+    setPage(1); 
   };
 
   return (
@@ -89,7 +89,7 @@ export default function HomePage() {
         <h1 className="text-4xl font-bold text-greenish">Welcome to the Book Library</h1>
       </div>
 
-      {/* Title Search */}
+      
       <div className="flex justify-center gap-1 lg:gap-4 mt-6">
         <input
           type="text"
@@ -99,16 +99,16 @@ export default function HomePage() {
           onChange={handleFilterChange}
           value={filters.title}
         />
-        {/* Filter Button */}
+        
         <button
           className="border px-3 py-2 rounded bg-greenish text-blueish"
-          onClick={() => setShowFilters(!showFilters)} // Toggle filter menu
+          onClick={() => setShowFilters(!showFilters)} 
         >
           Filters
         </button>
       </div>
 
-      {/* Filter Menu (Hidden/Shown based on showFilters state) */}
+      
       {showFilters && (
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
           <input

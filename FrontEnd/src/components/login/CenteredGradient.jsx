@@ -8,7 +8,7 @@ export default function CenteredGradient() {
         background: 'radial-gradient(45.07% 44.18% at 57.66% 52.11%, #EFFAFC 0%, #FFFFFF 100%)',
       }}
     >
-      {/* Gradient Background */}
+      
     </div>
   );
 }

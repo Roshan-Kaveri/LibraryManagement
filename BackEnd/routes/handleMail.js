@@ -12,22 +12,22 @@ router.post("/send-password", async (req, res) => {
   const { email } = req.body;
 
   try {
-    // Find user in database
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
 
-    // Generate a password reset token
+    
     const resetToken = crypto.randomBytes(32).toString("hex");
-    const resetTokenExpiry = Date.now() + 3600000; // Token valid for 1 hour
+    const resetTokenExpiry = Date.now() + 3600000; 
 
-    // Store token in user object (requires adding these fields to the schema)
+    
     user.resetToken = resetToken;
     user.resetTokenExpiry = resetTokenExpiry;
     await user.save();
 
-    // Configure nodemailer
+    
    
 
 
@@ -62,10 +62,10 @@ router.post("/send-password", async (req, res) => {
                 }
                 .button {
                   display: inline-block;
-                  background-color: #4CAF50; /* Green background */
-                  color: white !important; /* Explicitly setting white text */
+                  background-color: #4CAF50; 
+                  color: white !important; 
                   padding: 12px 24px;
-                  text-decoration: none; /* Remove underline */
+                  text-decoration: none; 
                   border-radius: 8px;
                   font-size: 16px;
                   font-weight: bold;
@@ -74,7 +74,7 @@ router.post("/send-password", async (req, res) => {
                   transition: background-color 0.3s ease;
                 }
                 .button:hover {
-                  background-color: #45a049; /* Darker green on hover */
+                  background-color: #45a049; 
                 }
                 .footer {
                   font-size: 12px;
@@ -114,20 +114,20 @@ router.post("/reset-password", async (req, res) => {
     const { token, newPassword } = req.body;
   
     try {
-      // Find user by reset token
+      
       const user = await User.findOne({
         resetToken: token,
-        resetTokenExpiry: { $gt: Date.now() }, // Check token is not expired
+        resetTokenExpiry: { $gt: Date.now() }, 
       });
       console.log(token)
       if (!user) {
         return res.status(400).send({ error: "Invalid or expired token" });
       }
   
-      // Hash and update the new password
+      
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       user.passwordHash = hashedPassword;
-      user.resetToken = undefined; // Clear the token
+      user.resetToken = undefined; 
       user.resetTokenExpiry = undefined;
       await user.save();
   

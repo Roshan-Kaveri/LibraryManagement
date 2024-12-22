@@ -1,10 +1,10 @@
-// cronJobs.js
+
 const cron = require('node-cron');
 const RentRequest = require('../models/requests');
 const Fine = require('../models/fine');
 
 const startCronJob = () => {
-  cron.schedule('*/1 * * * *', async () => { // Runs every 5 minutes
+  cron.schedule('*/1 * * * *', async () => { 
     const now = new Date();
     try {
       const expiredRequests = await RentRequest.find({
