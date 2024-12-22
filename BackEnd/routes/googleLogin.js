@@ -10,7 +10,6 @@ router.post('/google-login', async (req, res) => {
   if (!token) {
     return res.status(400).json({ error: 'Token is required' });
   }
-
   try {
     const googleResponse = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`);
 

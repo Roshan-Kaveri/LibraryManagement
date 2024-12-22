@@ -108,68 +108,76 @@ const BookStatus = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Manage Book Status</h1>
-      <table className="table-auto w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-greenish text-white">
-            <th className="border border-gray-300 px-4 py-2">Book Title</th>
-            <th className="border border-gray-300 px-4 py-2">User</th>
-            <th className="border border-gray-300 px-4 py-2">Status</th>
-            <th className="border border-gray-300 px-4 py-2">Time Remaining</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.length > 0 ? (
-            requests.map((req) => (
-              <tr key={req._id}>
-                <td className="border border-gray-300 px-4 py-2">{req.bookTitle}</td>
-                <td className="border border-gray-300 px-4 py-2">{req.userName}</td>
-                <td className="border border-gray-300 px-4 py-2">{req.status}</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {req.status === "Waiting to be Collected" &&
-                    calculateTimeRemaining(req.reservedUntil, req.isFined)} {/* Check if fine is applied */}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {req.status === "Requested" && (
-                    <button
-                      onClick={() => handleApprove(req._id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mr-2"
-                    >
-                      Approve
-                    </button>
-                  )}
-                  { (req.status === "Waiting to be Collected" || req.status === "Late") && (
-                    <button
-                      onClick={() => handleCollect(req._id)}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2"
-                    >
-                      Mark as Collected
-                    </button>
-                  )}
-                  {req.status === "Collected" && (
-                    <button
-                      onClick={() => handleReturn(req._id)}
-                      className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
-                    >
-                      Mark as Returned
-                    </button>
-                  )}
-                  {req.status === "Returned" && (
-                    <p className="text-gray-500 font-semibold">Returned</p>
-                  )}
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td className="border text-center text-gray-500 border-gray-300 px-4 py-2" colSpan="5">No Requests</td>
+    <div className="container mx-auto p-4 sm:p-6">
+  <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Manage Book Status</h1>
+  <div className="overflow-x-auto shadow-lg rounded-lg"> {/* Apply rounded-lg to the wrapper */}
+    <table className="table-auto w-full border-0 text-sm sm:text-base">
+      <thead>
+        <tr className="bg-greenish text-white ">
+          <th className="border px-3 sm:px-4 py-2 sm:py-3">Book Title</th>
+          <th className="border px-3 sm:px-4 py-2 sm:py-3">User</th>
+          <th className="border px-3 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">Status</th>
+          <th className="border px-3 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">Time Remaining</th>
+          <th className="border px-3 sm:px-4 py-2 sm:py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {requests.length > 0 ? (
+          requests.map((req) => (
+            <tr key={req._id} className="hover:bg-gray-100">
+              <td className="border px-3 sm:px-4 py-2 sm:py-3">{req.bookTitle}</td>
+              <td className="border px-3 sm:px-4 py-2 sm:py-3">{req.userName}</td>
+              <td className="border px-3 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">{req.status}</td>
+              <td className="border px-3 sm:px-4 py-2 sm:py-3 hidden sm:table-cell">
+                {req.status === "Waiting to be Collected" &&
+                  calculateTimeRemaining(req.reservedUntil, req.isFined)}
+              </td>
+              <td className="border px-3 sm:px-4 py-2 sm:py-3 flex gap-2">
+                {req.status === "Requested" && (
+                  <button
+                    onClick={() => handleApprove(req._id)}
+                    className="bg-green-500 text-white px-3 py-3 rounded-md hover:bg-green-600 focus:ring focus:ring-green-300"
+                  >
+                    Approve
+                  </button>
+                )}
+                {(req.status === "Waiting to be Collected" || req.status === "Late") && (
+                  <button
+                    onClick={() => handleCollect(req._id)}
+                    className="bg-blue-500 text-white px-3 py-3 rounded-md hover:bg-blue-600 focus:ring focus:ring-blue-300"
+                  >
+                    Mark as Collected
+                  </button>
+                )}
+                {req.status === "Collected" && (
+                  <button
+                    onClick={() => handleReturn(req._id)}
+                    className="bg-yellow-500 text-white px-3 py-3 rounded-md hover:bg-yellow-600 focus:ring focus:ring-yellow-300"
+                  >
+                    Mark as Returned
+                  </button>
+                )}
+                {req.status === "Returned" && (
+                  <p className="text-gray-500 font-semibold">Returned</p>
+                )}
+              </td>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          ))
+        ) : (
+          <tr>
+            <td
+              className="border text-center text-gray-500 px-3 sm:px-4 py-2 sm:py-3"
+              colSpan="5"
+            >
+              No Requests
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
+
   );
 };
 

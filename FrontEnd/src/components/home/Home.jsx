@@ -3,7 +3,7 @@ import BookGrid from '../book/BookGrid';
 import { jwtDecode } from 'jwt-decode';
 import NavBar from '../navbar/NavBar';
 
-export default function Home() {
+export default function HomePage() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState({ title: '', author: '', rating: '', publishedYear: '', category: '' });
@@ -87,16 +87,15 @@ export default function Home() {
     <NavBar></NavBar>
       <div className="text-center">
         <h1 className="text-4xl font-bold text-greenish">Welcome to the Book Library</h1>
-      
       </div>
 
       {/* Title Search */}
-      <div className="flex justify-center gap-4 mt-6">
+      <div className="flex justify-center gap-1 lg:gap-4 mt-6">
         <input
           type="text"
           name="title"
           placeholder="Search by Title"
-          className="border px-3 py-2 rounded w-96 border-greenish"
+          className="border px-3 py-2 rounded w-72 lg:w-96 ml-2 border-greenish"
           onChange={handleFilterChange}
           value={filters.title}
         />
@@ -149,7 +148,7 @@ export default function Home() {
 
       <div className="mt-6">
         <BookGrid books={books} />
-        {isLoading && <p className="text-center text-gray-500">Loading...</p>}
+        {isLoading && <p className="text-center text-gray-500"></p>}
       </div>
     </>
   );
