@@ -95,7 +95,7 @@ export default function HomePage() {
           type="text"
           name="title"
           placeholder="Search by Title"
-          className="border px-3 py-2 rounded w-72 lg:w-96 ml-2 border-greenish"
+          className="border px-3 py-2 rounded w-64 lg:w-96 ml-2 border-greenish"
           onChange={handleFilterChange}
           value={filters.title}
         />

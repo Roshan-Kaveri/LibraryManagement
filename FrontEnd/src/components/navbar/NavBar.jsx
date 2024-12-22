@@ -28,7 +28,7 @@ export default function NavBar() {
     <nav className="p-2 mb-8 bg-greenish">
       <div className="flex justify-between mx-4">
         {/* Logo or Title */}
-        <div className="flex text-lg lg:text-2xl p-2 text-blueish hover:text-[#13423c] font-semibold">
+        <div className="flex text-lg lg:text-2xl p-1 lg:p-2 text-blueish hover:text-[#13423c] font-semibold">
           <h1>Library Portal</h1>
         </div>
 
