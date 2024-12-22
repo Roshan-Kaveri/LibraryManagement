@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/navbar/NavBar";
-import Home from "./components/home/Home";
+
 import LoginForm from "./pages/LoginForm";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import RegisterForm from "./pages/RegisterForm";
@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import AdminPage from "./pages/Admin";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Home from "./pages/Home";
 
 function App() {
   return (

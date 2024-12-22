@@ -2,8 +2,8 @@ import React from "react";
 
 const BookItem = ({ book, onEdit, onDelete }) => {
   return (
-    <li className="mb-4 flex justify-between items-center">
-      <span>
+    <li className="mb-4  flex justify-between items-center">
+      <span className="line-clamp-1 w-[50vw]">
         <strong>{book.booktitle}</strong> by {book.bookauthor}
       </span>
       <div>
