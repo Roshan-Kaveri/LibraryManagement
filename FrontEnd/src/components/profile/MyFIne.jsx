@@ -17,7 +17,7 @@ const MyFines = ({ user }) => {
     const fetchFines = async () => {
       try {
         const userId = user.userId;
-        const response = await fetch("https://libbackend.hmmbo.com/api/unpaid-fines", {
+        const response = await fetch("http://localhost:5000/api/unpaid-fines", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const MyFines = ({ user }) => {
 
     const fetchBookDetails = async (bookId) => {
       try {
-        const response = await fetch(`https://libbackend.hmmbo.com/api/books/${bookId}`);
+        const response = await fetch(`http://localhost:5000/api/books/${bookId}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }

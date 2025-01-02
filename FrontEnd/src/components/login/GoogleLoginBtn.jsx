@@ -4,7 +4,7 @@ import React from 'react';
 export default function GoogleLoginBtn() {
   const handleGoogleLogin = async (credentialResponse) => {
     try {
-      const response = await fetch('https://libbackend.hmmbo.com/api/auth/google-login', {
+      const response = await fetch('http://localhost:5000/api/auth/google-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ export default function HomePage() {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page, ...filters });
-      const response = await fetch(`https://libbackend.hmmbo.com/api/books?${params.toString()}`);
+      const response = await fetch(`http://localhost:5000/api/books?${params.toString()}`);
       const data = await response.json();
       if (response.ok) {
         if (page === 1) {

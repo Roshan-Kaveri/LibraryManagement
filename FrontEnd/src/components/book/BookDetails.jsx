@@ -32,7 +32,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch("https://libbackend.hmmbo.com/api/books", {
+        const response = await fetch("http://localhost:5000/api/books", {
           method: "POST",  
           headers: {
             "Content-Type": "application/json",
@@ -60,7 +60,7 @@ useEffect(() => {
 
     const fetchRequestStatus = async () => {
       try {
-        const response = await fetch(`https://libbackend.hmmbo.com/api/requests/status`, {
+        const response = await fetch(`http://localhost:5000/api/requests/status`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -87,7 +87,7 @@ useEffect(() => {
   const handleRequestRent = async () => {
     if (!user || !book) return;  
     try {
-      const response = await fetch(`https://libbackend.hmmbo.com/api/requests/rent`, {
+      const response = await fetch(`http://localhost:5000/api/requests/rent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

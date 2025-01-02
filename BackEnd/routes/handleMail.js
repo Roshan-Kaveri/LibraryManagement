@@ -31,7 +31,7 @@ router.post("/send-password", async (req, res) => {
    
 
 
-    const resetLink = `https://libraryportal.hmmbo.com/reset-password?token=${resetToken}`;
+    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
     const mailOptions = {
         from: "roshan.k.kaveri@gmail.com",
         to: email,

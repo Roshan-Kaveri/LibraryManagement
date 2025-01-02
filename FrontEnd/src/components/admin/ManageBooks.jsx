@@ -8,7 +8,7 @@ const ManageBooks = () => {
   const [editingBook, setEditingBook] = useState(null);
 
   useEffect(() => {
-    fetch("https://libbackend.hmmbo.com/api/books/admin")
+    fetch("http://localhost:5000/api/books/admin")
       .then((response) => response.json())
       .then((data) => setBooks(data.books)) 
       .catch((error) => console.error("Error fetching books:", error));
@@ -19,7 +19,7 @@ const ManageBooks = () => {
   };
 
   const handleDelete = (bookId) => {
-    fetch(`https://libbackend.hmmbo.com/api/books/delete/${bookId}`, {
+    fetch(`http://localhost:5000/api/books/delete/${bookId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -33,7 +33,7 @@ const ManageBooks = () => {
   const handleFormSubmit = (formData) => {
     if (editingBook) {
       
-      fetch(`https://libbackend.hmmbo.com/api/books/update/${editingBook._id}`, { 
+      fetch(`http://localhost:5000/api/books/update/${editingBook._id}`, { 
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

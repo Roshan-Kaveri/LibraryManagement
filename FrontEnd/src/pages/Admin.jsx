@@ -19,7 +19,7 @@ const AdminPage = () => {
         const userId = decoded.userId;
 
         
-        fetch(`https://libbackend.hmmbo.com/api/users/${userId}`)
+        fetch(`http://localhost:5000/api/users/${userId}`)
           .then((response) => response.json())
           .then((data) => {
             if (data && data.isadmin) {
