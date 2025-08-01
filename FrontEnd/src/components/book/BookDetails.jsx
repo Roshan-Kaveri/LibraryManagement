@@ -27,13 +27,16 @@ const BookDetails = () => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/books", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ bookId }),
-        });
+        const response = await fetch(
+          "http://library-management-h7qr.vercel.app/api/books",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ bookId }),
+          }
+        );
 
         if (!response.ok) throw new Error("Failed to fetch book details");
 
@@ -54,7 +57,7 @@ const BookDetails = () => {
     const fetchRequestStatus = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/requests/status`,
+          `http://library-management-h7qr.vercel.app/api/requests/status`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -86,7 +89,7 @@ const BookDetails = () => {
     const checkDigitalOwnership = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/order/check/${user.userId}/${book._id}`
+          `http://library-management-h7qr.vercel.app/api/order/check/${user.userId}/${book._id}`
         );
         const data = await res.json();
 
@@ -108,15 +111,18 @@ const BookDetails = () => {
   const handleRequestRent = async () => {
     if (!user || !book) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/requests/rent`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: user.userId,
-          bookId: book._id,
-          bookTitle: book.booktitle,
-        }),
-      });
+      const response = await fetch(
+        `http://library-management-h7qr.vercel.app/api/requests/rent`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user.userId,
+            bookId: book._id,
+            bookTitle: book.booktitle,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to request the book");
       setRequestStatus("Requested");
@@ -128,11 +134,14 @@ const BookDetails = () => {
   const handleBuy = async () => {
     if (!user || !book) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/order/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.userId, bookId: book._id }),
-      });
+      const response = await fetch(
+        `http://library-management-h7qr.vercel.app/api/order/create`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: user.userId, bookId: book._id }),
+        }
+      );
 
       const data = await response.json();
 
@@ -150,7 +159,7 @@ const BookDetails = () => {
           order_id: data.orderId,
           handler: async function (response) {
             const verify = await fetch(
-              "http://localhost:5000/api/order/success",
+              "http://library-management-h7qr.vercel.app/api/order/success",
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

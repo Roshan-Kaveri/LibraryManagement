@@ -8,47 +8,52 @@ const ManageBooks = () => {
   const [editingBook, setEditingBook] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/books/admin")
+    fetch("http://library-management-h7qr.vercel.app/api/books/admin")
       .then((response) => response.json())
-      .then((data) => setBooks(data.books)) 
+      .then((data) => setBooks(data.books))
       .catch((error) => console.error("Error fetching books:", error));
   }, []);
 
   const handleEditClick = (book) => {
-    setEditingBook(book); 
+    setEditingBook(book);
   };
 
   const handleDelete = (bookId) => {
-    fetch(`http://localhost:5000/api/books/delete/${bookId}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `http://library-management-h7qr.vercel.app/api/books/delete/${bookId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((response) => response.json())
       .then(() => {
-        
-        setBooks((prevBooks) => prevBooks.filter((book) => book._id !== bookId)); 
+        setBooks((prevBooks) =>
+          prevBooks.filter((book) => book._id !== bookId)
+        );
       })
       .catch((error) => console.error("Error deleting book:", error));
   };
 
   const handleFormSubmit = (formData) => {
     if (editingBook) {
-      
-      fetch(`http://localhost:5000/api/books/update/${editingBook._id}`, { 
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      fetch(
+        `http://library-management-h7qr.vercel.app/api/books/update/${editingBook._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      )
         .then((response) => response.json())
         .then(() => {
-          
           setBooks((prevBooks) =>
             prevBooks.map((book) =>
-              book._id === editingBook._id ? { ...book, ...formData } : book 
+              book._id === editingBook._id ? { ...book, ...formData } : book
             )
           );
-          setEditingBook(null); 
+          setEditingBook(null);
         })
         .catch((error) => console.error("Error updating book:", error));
     }
@@ -56,16 +61,16 @@ const ManageBooks = () => {
 
   return (
     <div className="mx-auto p-8 pt-0">
-        <div className="flex">
+      <div className="flex">
         <h2 className="text-xl font-bold mb-6"></h2>
-        </div>
+      </div>
       {editingBook ? (
         <BookForm book={editingBook} onSubmit={handleFormSubmit} />
       ) : (
         <ul className="bg-white ">
           {books.map((book) => (
             <BookItem
-              key={book._id}  
+              key={book._id}
               book={book}
               onEdit={handleEditClick}
               onDelete={() => handleDelete(book._id)}

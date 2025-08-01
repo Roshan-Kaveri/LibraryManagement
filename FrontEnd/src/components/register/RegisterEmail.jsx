@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function RegisterEmail() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,52 +26,58 @@ export default function RegisterEmail() {
     const { name, email, password, confirmPassword } = formData;
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError("Passwords do not match.");
       return;
     }
 
     if (!name || !email || !password || !confirmPassword) {
-      setError('Please fill all fields.');
+      setError("Please fill all fields.");
       return;
     }
 
-    setError('');
+    setError("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "http://library-management-h7qr.vercel.app/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccessMessage('Registration successful! You can now login.');
+        setSuccessMessage("Registration successful! You can now login.");
         setFormData({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
         });
-        localStorage.setItem('token', data.token); 
-        window.location.href = '/';
+        localStorage.setItem("token", data.token);
+        window.location.href = "/";
       } else {
-        setError(data.error || 'Error during registration. Please try again.');
+        setError(data.error || "Error during registration. Please try again.");
       }
     } catch (error) {
-      setError('Error during registration. Please try again.');
+      setError("Error during registration. Please try again.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-2 p-4 z-10">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-center items-center gap-2 p-4 z-10"
+    >
       {error && <div className="text-red-500">{error}</div>}
       {successMessage && <div className="text-green-500">{successMessage}</div>}
 
@@ -117,7 +123,6 @@ export default function RegisterEmail() {
       >
         Register
       </button>
-      
     </form>
   );
 }

@@ -3,7 +3,7 @@ import BookStatus from "../components/admin/BookStatus";
 import PaymentStatus from "../components/admin/PaymentStatus";
 import AddBookForm from "../components/admin/AddBookForm";
 import ManageBooks from "../components/admin/ManageBooks";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/navbar/NavBar";
 
@@ -18,8 +18,7 @@ const AdminPage = () => {
         const decoded = jwtDecode(token);
         const userId = decoded.userId;
 
-        
-        fetch(`http://localhost:5000/api/users/${userId}`)
+        fetch(`http://library-management-h7qr.vercel.app/api/users/${userId}`)
           .then((response) => response.json())
           .then((data) => {
             if (data && data.isadmin) {
@@ -31,7 +30,7 @@ const AdminPage = () => {
           })
           .catch((err) => {
             console.error("Error fetching user data:", err);
-            navigate("/login"); 
+            navigate("/login");
           });
       } catch (err) {
         console.error("Error decoding token:", err);
@@ -44,7 +43,7 @@ const AdminPage = () => {
   }, [navigate]);
 
   if (!isAdmin) {
-    return null; 
+    return null;
   }
 
   return (

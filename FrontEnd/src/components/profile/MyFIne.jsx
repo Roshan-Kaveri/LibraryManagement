@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { QRCodeSVG } from "qrcode.react"; 
+import { QRCodeSVG } from "qrcode.react";
 
 const MyFines = ({ user }) => {
   const [fines, setFines] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [books, setBooks] = useState({}); 
-  const [isPC, setIsPC] = useState(false); 
-  const [showModal, setShowModal] = useState(false); 
+  const [books, setBooks] = useState({});
+  const [isPC, setIsPC] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    
     const userAgent = navigator.userAgent.toLowerCase();
-    const isPC = !/android|iphone|ipad|ipod|windows phone/i.test(userAgent); 
+    const isPC = !/android|iphone|ipad|ipod|windows phone/i.test(userAgent);
     setIsPC(isPC);
 
     const fetchFines = async () => {
       try {
         const userId = user.userId;
-        const response = await fetch("http://localhost:5000/api/unpaid-fines", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId }),
-        });
+        const response = await fetch(
+          "http://library-management-h7qr.vercel.app/api/unpaid-fines",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
@@ -32,7 +34,6 @@ const MyFines = ({ user }) => {
         const data = await response.json();
         setFines(data.fines);
 
-        
         data.fines.forEach((fine) => {
           fetchBookDetails(fine.bookId);
         });
@@ -45,7 +46,9 @@ const MyFines = ({ user }) => {
 
     const fetchBookDetails = async (bookId) => {
       try {
-        const response = await fetch(`http://localhost:5000/api/books/${bookId}`);
+        const response = await fetch(
+          `http://library-management-h7qr.vercel.app/api/books/${bookId}`
+        );
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -71,14 +74,11 @@ const MyFines = ({ user }) => {
       return;
     }
 
-    
     const upiLink = `upi://pay?pa=yourname@bank&pn=Library&am=${totalAmount}&cu=INR&tn=Payment for Library Fines`;
 
-    
     if (isPC) {
       setShowModal(true);
     } else {
-      
       window.location.href = upiLink;
     }
   };
@@ -99,45 +99,49 @@ const MyFines = ({ user }) => {
       {isLoading ? (
         <p className="text-gray-500">Loading...</p>
       ) : fines.length > 0 ? (
-        <>      <h2 className="text-2xl text-greenish font-semibold mb-4">Unpaid Fines</h2>
-        <div className="overflow-x-auto shadow-md rounded-lg">
-          <table className="min-w-full table-auto text-left border-collapse">
-            <thead>
-              <tr className="bg-greenish text-white">
-                <th className="px-4 py-2 border">Book Title</th>
-                <th className="px-4 py-2 border">Amount</th>
-                <th className="px-4 py-2 border">Fined On</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fines.map((fine) => (
-                <tr key={fine._id} className="border-b">
-                  <td className="px-4 py-2">
-                    {books[fine.bookId] || "Loading..."}
-                  </td>
-                  <td className="px-4 py-2">${fine.amount}</td>
-                  <td className="px-4 py-2">{formatStartTime(fine.startTime)}</td>
+        <>
+          {" "}
+          <h2 className="text-2xl text-greenish font-semibold mb-4">
+            Unpaid Fines
+          </h2>
+          <div className="overflow-x-auto shadow-md rounded-lg">
+            <table className="min-w-full table-auto text-left border-collapse">
+              <thead>
+                <tr className="bg-greenish text-white">
+                  <th className="px-4 py-2 border">Book Title</th>
+                  <th className="px-4 py-2 border">Amount</th>
+                  <th className="px-4 py-2 border">Fined On</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="mt-4 text-right">
-            <span className="font-semibold">Total: ${totalAmount}</span>
-            <button
-              onClick={handlePayAllNow}
-              className="ml-4 px-6 py-2 bg-greenish text-white rounded hover:bg-green-800"
-            >
-              Pay All Now
-            </button>
+              </thead>
+              <tbody>
+                {fines.map((fine) => (
+                  <tr key={fine._id} className="border-b">
+                    <td className="px-4 py-2">
+                      {books[fine.bookId] || "Loading..."}
+                    </td>
+                    <td className="px-4 py-2">${fine.amount}</td>
+                    <td className="px-4 py-2">
+                      {formatStartTime(fine.startTime)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-4 text-right">
+              <span className="font-semibold">Total: ${totalAmount}</span>
+              <button
+                onClick={handlePayAllNow}
+                className="ml-4 px-6 py-2 bg-greenish text-white rounded hover:bg-green-800"
+              >
+                Pay All Now
+              </button>
+            </div>
           </div>
-        </div>
         </>
-
       ) : (
         <p></p>
       )}
 
-      
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-10 pl-14 pr-14 rounded shadow-lg text-center">

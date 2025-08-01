@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ResetPassword() {
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  
   const getQueryParam = (param) => {
     const urlParams = new URLSearchParams(location.search);
     return urlParams.get(param);
   };
 
-  const token = getQueryParam('token');
+  const token = getQueryParam("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,31 +26,38 @@ export default function ResetPassword() {
     }
 
     setLoading(true);
-    setErrorMessage('');
-    setSuccessMessage('');
+    setErrorMessage("");
+    setSuccessMessage("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/reset-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token, newPassword }),
-      });
+      const response = await fetch(
+        "http://library-management-h7qr.vercel.app/api/auth/reset-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token, newPassword }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccessMessage('Password reset successfully. You can now log in with your new password.');
+        setSuccessMessage(
+          "Password reset successfully. You can now log in with your new password."
+        );
         setTimeout(() => {
-          navigate('/');  
+          navigate("/");
         }, 2000);
       } else {
-        setErrorMessage(data.error || 'Failed to reset password. Please try again.');
+        setErrorMessage(
+          data.error || "Failed to reset password. Please try again."
+        );
       }
     } catch (error) {
-      setErrorMessage('An error occurred. Please try again later.');
-      console.error('Error during password reset:', error);
+      setErrorMessage("An error occurred. Please try again later.");
+      console.error("Error during password reset:", error);
     } finally {
       setLoading(false);
     }
@@ -91,7 +97,7 @@ export default function ResetPassword() {
         disabled={loading}
         className="w-full h-12 bg-greenish text-white font-semibold rounded-md hover:bg-greenish-dark transition-all disabled:opacity-50"
       >
-        {loading ? 'Resetting...' : 'Reset Password'}
+        {loading ? "Resetting..." : "Reset Password"}
       </button>
     </form>
   );

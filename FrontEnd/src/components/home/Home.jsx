@@ -1,44 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import BookGrid from '../book/BookGrid';
-import { jwtDecode } from 'jwt-decode';
-import NavBar from '../navbar/NavBar';
+import React, { useEffect, useState } from "react";
+import BookGrid from "../book/BookGrid";
+import { jwtDecode } from "jwt-decode";
+import NavBar from "../navbar/NavBar";
 
 export default function HomePage() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
-  const [filters, setFilters] = useState({ title: '', author: '', rating: '', publishedYear: '', category: '' });
+  const [filters, setFilters] = useState({
+    title: "",
+    author: "",
+    rating: "",
+    publishedYear: "",
+    category: "",
+  });
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
-  
   const fetchBooks = async (page, filters) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page, ...filters });
-      const response = await fetch(`http://localhost:5000/api/books?${params.toString()}`);
+      const response = await fetch(
+        `http://library-management-h7qr.vercel.app/api/books?${params.toString()}`
+      );
       const data = await response.json();
       if (response.ok) {
         if (page === 1) {
-          setBooks(data.books); 
+          setBooks(data.books);
         } else {
-          setBooks((prevBooks) => [...prevBooks, ...data.books]); 
+          setBooks((prevBooks) => [...prevBooks, ...data.books]);
         }
       } else {
-        console.error('Error fetching books:', data.error);
+        console.error("Error fetching books:", data.error);
       }
     } catch (error) {
-      console.error('Error fetching books:', error);
+      console.error("Error fetching books:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
-
-  
-  
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const decoded = jwtDecode(token);
       const { userId } = decoded;
@@ -48,48 +52,46 @@ export default function HomePage() {
 
   useEffect(() => {
     if (page === 1) {
-      setBooks([]); 
+      setBooks([]);
     }
-    fetchBooks(page, filters); 
+    fetchBooks(page, filters);
   }, [page, filters]);
 
-  
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 10 &&
+        document.documentElement.offsetHeight - 10 &&
       !isLoading
     ) {
-      setPage((prevPage) => prevPage + 1); 
+      setPage((prevPage) => prevPage + 1);
     }
   };
-  
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isLoading]);
 
-  
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
     }));
-    setPage(1); 
+    setPage(1);
   };
 
   return (
     <>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-greenish">Welcome to the Book Library</h1>
+        <h1 className="text-4xl font-bold text-greenish">
+          Welcome to the Book Library
+        </h1>
       </div>
 
-      
       <div className="flex justify-center gap-1 lg:gap-4 mt-6">
         <input
           type="text"
@@ -99,16 +101,15 @@ export default function HomePage() {
           onChange={handleFilterChange}
           value={filters.title}
         />
-        
+
         <button
           className="border px-3 py-2 rounded bg-greenish text-blueish"
-          onClick={() => setShowFilters(!showFilters)} 
+          onClick={() => setShowFilters(!showFilters)}
         >
           Filters
         </button>
       </div>
 
-      
       {showFilters && (
         <div className="flex justify-center gap-4 mt-6 flex-wrap">
           <input
