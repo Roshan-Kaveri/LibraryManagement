@@ -28,7 +28,7 @@ const BookDetails = () => {
     const fetchBookDetails = async () => {
       try {
         const response = await fetch(
-          "http://library-management-h7qr.vercel.app/api/books",
+          "https://library-management-h7qr.vercel.app/api/books",
           {
             method: "POST",
             headers: {
@@ -57,7 +57,7 @@ const BookDetails = () => {
     const fetchRequestStatus = async () => {
       try {
         const response = await fetch(
-          `http://library-management-h7qr.vercel.app/api/requests/status`,
+          `https://library-management-h7qr.vercel.app/api/requests/status`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -89,7 +89,7 @@ const BookDetails = () => {
     const checkDigitalOwnership = async () => {
       try {
         const res = await fetch(
-          `http://library-management-h7qr.vercel.app/api/order/check/${user.userId}/${book._id}`
+          `https://library-management-h7qr.vercel.app/api/order/check/${user.userId}/${book._id}`
         );
         const data = await res.json();
 
@@ -112,7 +112,7 @@ const BookDetails = () => {
     if (!user || !book) return;
     try {
       const response = await fetch(
-        `http://library-management-h7qr.vercel.app/api/requests/rent`,
+        `https://library-management-h7qr.vercel.app/api/requests/rent`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -135,7 +135,7 @@ const BookDetails = () => {
     if (!user || !book) return;
     try {
       const response = await fetch(
-        `http://library-management-h7qr.vercel.app/api/order/create`,
+        `https://library-management-h7qr.vercel.app/api/order/create`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -159,7 +159,7 @@ const BookDetails = () => {
           order_id: data.orderId,
           handler: async function (response) {
             const verify = await fetch(
-              "http://library-management-h7qr.vercel.app/api/order/success",
+              "https://library-management-h7qr.vercel.app/api/order/success",
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

@@ -17,7 +17,7 @@ export default function ForgotForm() {
 
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/auth/send-password",
+        "https://library-management-h7qr.vercel.app/api/auth/send-password",
         {
           method: "POST",
           headers: {

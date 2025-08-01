@@ -31,7 +31,7 @@ export default function ResetPassword() {
 
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/auth/reset-password",
+        "https://library-management-h7qr.vercel.app/api/auth/reset-password",
         {
           method: "POST",
           headers: {

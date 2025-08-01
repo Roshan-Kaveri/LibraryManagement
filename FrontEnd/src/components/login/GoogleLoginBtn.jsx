@@ -5,7 +5,7 @@ export default function GoogleLoginBtn() {
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/auth/google-login",
+        "https://library-management-h7qr.vercel.app/api/auth/google-login",
         {
           method: "POST",
           headers: {

@@ -15,7 +15,7 @@ export default function LoginEmail() {
 
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/auth/login",
+        "https://library-management-h7qr.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {

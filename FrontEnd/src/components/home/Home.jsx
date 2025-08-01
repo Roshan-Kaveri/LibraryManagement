@@ -22,7 +22,7 @@ export default function HomePage() {
     try {
       const params = new URLSearchParams({ page, ...filters });
       const response = await fetch(
-        `http://library-management-h7qr.vercel.app/api/books?${params.toString()}`
+        `https://library-management-h7qr.vercel.app/api/books?${params.toString()}`
       );
       const data = await response.json();
       if (response.ok) {

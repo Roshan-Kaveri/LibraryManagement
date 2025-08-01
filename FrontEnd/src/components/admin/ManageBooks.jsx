@@ -8,7 +8,7 @@ const ManageBooks = () => {
   const [editingBook, setEditingBook] = useState(null);
 
   useEffect(() => {
-    fetch("http://library-management-h7qr.vercel.app/api/books/admin")
+    fetch("https://library-management-h7qr.vercel.app/api/books/admin")
       .then((response) => response.json())
       .then((data) => setBooks(data.books))
       .catch((error) => console.error("Error fetching books:", error));
@@ -20,7 +20,7 @@ const ManageBooks = () => {
 
   const handleDelete = (bookId) => {
     fetch(
-      `http://library-management-h7qr.vercel.app/api/books/delete/${bookId}`,
+      `https://library-management-h7qr.vercel.app/api/books/delete/${bookId}`,
       {
         method: "DELETE",
       }
@@ -37,7 +37,7 @@ const ManageBooks = () => {
   const handleFormSubmit = (formData) => {
     if (editingBook) {
       fetch(
-        `http://library-management-h7qr.vercel.app/api/books/update/${editingBook._id}`,
+        `https://library-management-h7qr.vercel.app/api/books/update/${editingBook._id}`,
         {
           method: "PUT",
           headers: {

@@ -18,7 +18,7 @@ const AdminPage = () => {
         const decoded = jwtDecode(token);
         const userId = decoded.userId;
 
-        fetch(`http://library-management-h7qr.vercel.app/api/users/${userId}`)
+        fetch(`https://library-management-h7qr.vercel.app/api/users/${userId}`)
           .then((response) => response.json())
           .then((data) => {
             if (data && data.isadmin) {

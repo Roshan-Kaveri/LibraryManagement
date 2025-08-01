@@ -8,7 +8,7 @@ const PaymentStatus = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://library-management-h7qr.vercel.app/api/users/total-fines"
+          "https://library-management-h7qr.vercel.app/api/users/total-fines"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch users");
@@ -29,7 +29,7 @@ const PaymentStatus = () => {
   const handleMarkPaid = async (userId) => {
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/fines/mark-paid",
+        "https://library-management-h7qr.vercel.app/api/fines/mark-paid",
         {
           method: "POST",
           headers: {

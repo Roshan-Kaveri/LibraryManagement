@@ -9,7 +9,7 @@ export default function NavBar() {
     const fetchUser = async (userId) => {
       try {
         const response = await fetch(
-          `http://library-management-h7qr.vercel.app/api/users/${userId}`
+          `https://library-management-h7qr.vercel.app/api/users/${userId}`
         );
         const userData = await response.json();
         setUser(userData);

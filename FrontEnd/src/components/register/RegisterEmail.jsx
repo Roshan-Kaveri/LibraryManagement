@@ -39,7 +39,7 @@ export default function RegisterEmail() {
 
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/auth/register",
+        "https://library-management-h7qr.vercel.app/api/auth/register",
         {
           method: "POST",
           headers: {

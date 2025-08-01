@@ -14,7 +14,7 @@ const MyDetails = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          `http://library-management-h7qr.vercel.app/api/users/${userId}`
+          `https://library-management-h7qr.vercel.app/api/users/${userId}`
         );
         if (!response.ok) {
           throw new Error("Error fetching user details");

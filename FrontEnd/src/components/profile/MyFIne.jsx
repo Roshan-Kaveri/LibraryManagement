@@ -17,7 +17,7 @@ const MyFines = ({ user }) => {
       try {
         const userId = user.userId;
         const response = await fetch(
-          "http://library-management-h7qr.vercel.app/api/unpaid-fines",
+          "https://library-management-h7qr.vercel.app/api/unpaid-fines",
           {
             method: "POST",
             headers: {
@@ -47,7 +47,7 @@ const MyFines = ({ user }) => {
     const fetchBookDetails = async (bookId) => {
       try {
         const response = await fetch(
-          `http://library-management-h7qr.vercel.app/api/books/${bookId}`
+          `https://library-management-h7qr.vercel.app/api/books/${bookId}`
         );
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);

@@ -9,7 +9,7 @@ const BookStatus = () => {
     const fetchRequests = async () => {
       try {
         const response = await fetch(
-          "http://library-management-h7qr.vercel.app/api/rent-requests"
+          "https://library-management-h7qr.vercel.app/api/rent-requests"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch rent requests");
@@ -35,7 +35,7 @@ const BookStatus = () => {
   const handleApprove = async (id) => {
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/rent-requests/approve",
+        "https://library-management-h7qr.vercel.app/api/rent-requests/approve",
         {
           method: "PATCH",
           headers: {
@@ -59,7 +59,7 @@ const BookStatus = () => {
   const handleCollect = async (id) => {
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/rent-requests/collect",
+        "https://library-management-h7qr.vercel.app/api/rent-requests/collect",
         {
           method: "PATCH",
           headers: {
@@ -83,7 +83,7 @@ const BookStatus = () => {
   const handleReturn = async (id) => {
     try {
       const response = await fetch(
-        "http://library-management-h7qr.vercel.app/api/rent-requests/return",
+        "https://library-management-h7qr.vercel.app/api/rent-requests/return",
         {
           method: "PATCH",
           headers: {

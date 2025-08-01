@@ -89,7 +89,7 @@ router.post("/register", async (req, res) => {
               <h2>Welcome to Our Service, ${name}!</h2>
               <p>Your account has been successfully registered. We're excited to have you on board!</p>
               <p>If you ever decide to delete your account, simply click the button below:</p>
-              <a href="http://library-management-h7qr.vercel.app/api/auth/delete-account?token=${deletionToken}" class="button">Delete My Account</a>
+              <a href="https://library-management-h7qr.vercel.app/api/auth/delete-account?token=${deletionToken}" class="button">Delete My Account</a>
               <p>If you did not request this action, please ignore this email. Your account is safe.</p>
               <p>Thank you for being a part of our community!</p>
             </div>
