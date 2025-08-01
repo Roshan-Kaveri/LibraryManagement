@@ -52,7 +52,7 @@ const AddBookForm = () => {
 
   return (
     <div className="mx-auto p-8 pb-0">
-            <h1 className="text-3xl font-bold mb-6">Manage Books</h1>
+      <h1 className="text-3xl font-bold mb-6">Manage Books</h1>
 
       <button
         onClick={() => setFormVisible(!formVisible)}
@@ -67,9 +67,7 @@ const AddBookForm = () => {
           className="bg-white p-6 mt-6 rounded shadow-md"
         >
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Title:
-            </label>
+            <label className="block text-gray-700 font-bold mb-2">Title:</label>
             <input
               type="text"
               name="booktitle"
@@ -154,6 +152,49 @@ const AddBookForm = () => {
               className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+          <div className="mb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="isDownloadable"
+                checked={formData.isDownloadable}
+                onChange={handleInputChange}
+                className="mr-2"
+              />
+              <span className="text-gray-700 font-bold">Downloadable?</span>
+            </label>
+          </div>
+
+          {formData.isDownloadable && (
+            <>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Download Link:
+                </label>
+                <input
+                  type="text"
+                  name="downloadLink"
+                  value={formData.downloadLink}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Price (₹):
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  min="0"
+                  className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </>
+          )}
           <button
             type="submit"
             className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 transition"

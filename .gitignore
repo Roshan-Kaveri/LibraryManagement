@@ -1,0 +1,34 @@
+# Node modules
+FrontEnd/node_modules/
+BackEnd/node_modules/
+
+# Environment variables
+FrontEnd/.env
+BackEnd/.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Build output (optional, if using build steps)
+FrontEnd/build/
+FrontEnd/dist/
+BackEnd/dist/
+
+# Test coverage (optional)
+coverage/
+
+# Others (optional, safe to include)
+.env.local
+.env.development
+.env.production
