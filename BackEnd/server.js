@@ -49,6 +49,16 @@ app.use("/api", handleFines);
 app.use("/api/users", getUserById);
 app.use("/api", handlePayment);
 
+app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://libraryportal.hmmbo.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
