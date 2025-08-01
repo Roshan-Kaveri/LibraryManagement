@@ -1,22 +1,21 @@
-const express = require('express');
-const User = require('../models/user');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); 
+const express = require("express");
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
-const transporter = require('../config/transporter');
+const transporter = require("../config/transporter");
 
-
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    return res.status(400).json({ error: 'Please fill all fields' });
+    return res.status(400).json({ error: "Please fill all fields" });
   }
 
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'Email already exists' });
+      return res.status(400).json({ error: "Email already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,15 +28,14 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    
-    const deletionToken = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-
-    
+    const deletionToken = jwt.sign({ userId: user._id }, "your-secret-key", {
+      expiresIn: "1h",
+    });
 
     const mailOptions = {
-      from: 'your-email@gmail.com',
+      from: "your-email@gmail.com",
       to: email,
-      subject: 'Account Registration and Deletion Link',
+      subject: "Account Registration and Deletion Link",
       html: `
         <html>
           <head>
@@ -91,7 +89,7 @@ router.post('/register', async (req, res) => {
               <h2>Welcome to Our Service, ${name}!</h2>
               <p>Your account has been successfully registered. We're excited to have you on board!</p>
               <p>If you ever decide to delete your account, simply click the button below:</p>
-              <a href="http://localhost:5000/api/auth/delete-account?token=${deletionToken}" class="button">Delete My Account</a>
+              <a href="http://library-management-h7qr.vercel.app/api/auth/delete-account?token=${deletionToken}" class="button">Delete My Account</a>
               <p>If you did not request this action, please ignore this email. Your account is safe.</p>
               <p>Thank you for being a part of our community!</p>
             </div>
@@ -102,50 +100,49 @@ router.post('/register', async (req, res) => {
         </html>
       `,
     };
-    
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error('Error sending email:', error);
+        console.error("Error sending email:", error);
       } else {
-        console.log('Email sent:', info.response);
+        console.log("Email sent:", info.response);
       }
     });
 
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
-    res.status(201).json({ message: 'Registration successful!', token });
+    const token = jwt.sign({ userId: user._id }, "your-secret-key", {
+      expiresIn: "1h",
+    });
+    res.status(201).json({ message: "Registration successful!", token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-router.get('/delete-account', async (req, res) => {
-  const { token } = req.query; 
+router.get("/delete-account", async (req, res) => {
+  const { token } = req.query;
 
   if (!token) {
-    return res.status(400).json({ error: 'Token is required' });
+    return res.status(400).json({ error: "Token is required" });
   }
 
   try {
-    
-    const decoded = jwt.verify(token, 'your-secret-key');
+    const decoded = jwt.verify(token, "your-secret-key");
     const userId = decoded.userId;
 
-    
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
 
     await user.deleteOne();
-    res.status(200).json({ message: 'Your account has been deleted successfully.' });
+    res
+      .status(200)
+      .json({ message: "Your account has been deleted successfully." });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: "Server error" });
   }
 });
-
-
 
 module.exports = router;
